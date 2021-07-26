@@ -14,8 +14,8 @@ export default function RadioGroup(props) {
                 onChange={onChange}>
                 {
                     items.map(
-                        (item, index) => (
-                            <FormControlLabel value={item.id} control={<Radio />} label={item.title} />
+                        item => (
+                            <FormControlLabel key={item.id} value={item.id} control={<Radio />} label={item.title} />
                         )
                     )
                 }
@@ -23,3 +23,5 @@ export default function RadioGroup(props) {
         </FormControl>
     )
 }
+
+// https://www.youtube.com/watch?v=m-2_gb_3L7Q&ab_channel=CodAffection - 1:36:42

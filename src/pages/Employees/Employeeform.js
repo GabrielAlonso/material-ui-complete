@@ -1,7 +1,8 @@
 import React from 'react';
-import { FormControl, FormControlLabel, FormLabel, Grid, RadioGroup, Radio } from '@material-ui/core';
-import { useForm, Form } from '../../components/useForm';
+import { Grid } from '@material-ui/core';
 import Controls from '../../components/controls/Controls';
+import { useForm, Form } from '../../components/useForm';
+import * as employeeService from '../../services/employeeService'
 
 const genderItems = [
     { id: 'male', title: 'Male' },
@@ -15,7 +16,7 @@ const initialFValues = {
     mobile: '',
     city: '',
     gender: 'male',
-    departamentId: '',
+    departmentId: '',
     hireDate: new Date(),
     isPermanent: false
 }
@@ -52,6 +53,13 @@ export default function Employeeform() {
                         value={values.gender}
                         onChange={handleInputChange}
                         items={genderItems}
+                    />
+                    <Controls.Select
+                        name="departmentId"
+                        label="Departament"
+                        value={values.departmentId}
+                        onChange={handleInputChange}
+                        options={employeeService.getDepartmentCollection()}
                     />
                 </Grid>
             </Grid>
