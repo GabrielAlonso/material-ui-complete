@@ -4,8 +4,7 @@ import SideMenu from '../components/SideMenu';
 import { CssBaseline, makeStyles } from '@material-ui/core';
 import Header from '../components/Header';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import PageHeader from '../components/PageHeader';
-import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
+import Employees from '../pages/Employees/Employees';
 
 const theme = createTheme({
   palette: {
@@ -36,12 +35,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <SideMenu />
       <div className={classes.appMain}>
-        <Header />
-        <PageHeader
-          title="Page Header"
-          subTitle="Page description"
-          icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
-        />
+        <Header />        
+        <Employees />
       </div>
       <CssBaseline />
     </ThemeProvider>
