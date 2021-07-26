@@ -19,6 +19,12 @@ const useStyles = makeStyles({
         '& .MuiSvgIcon-root': {
             marginRight:'8px'
         }
+    },
+    btnRoot: {
+        // backgroundColor: 'green'
+    },
+    btnLabel: {
+       // backgroundColor: 'red'
     }
 })
 
@@ -40,7 +46,7 @@ export default function Header() {
                     </Grid>
                     <Grid item sm></Grid>
                     <Grid item>
-                        <IconButton>
+                        <IconButton classes={{root:classes.btnRoot,label:classes.btnLabel}}>
                             <Badge badgeContent={4} color="secondary">
                                 <NotificationsNoneIcon fontSize="small" />
                             </Badge>
