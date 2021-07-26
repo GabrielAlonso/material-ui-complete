@@ -38,12 +38,12 @@ function App() {
       <div className={classes.appMain}>
         <Header />
         <PageHeader
-        title="Page Header"
-        subTitle="Page description"
-        icon={<PeopleOutlineTwoToneIcon />}
+          title="Page Header"
+          subTitle="Page description"
+          icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
         />
       </div>
-      <CssBaseline/>
+      <CssBaseline />
     </ThemeProvider>
   );
 }
