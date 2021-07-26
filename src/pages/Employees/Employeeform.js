@@ -34,15 +34,27 @@ export default function Employeeform() {
             <Grid container>
                 <Grid item xs={6}>
                     <Controls.Input
-                        name="fullName"
                         label="Full Name"
+                        name="fullName"
                         value={values.fullName}
                         onChange={handleInputChange}
                     />
                     <Controls.Input
-                        name="email"
                         label="Email"
+                        name="email"
                         value={values.email}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        label="Mobile"
+                        name="mobile"
+                        value={values.mobile}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        label="City"
+                        name="city"
+                        value={values.city}
                         onChange={handleInputChange}
                     />
                 </Grid>
@@ -62,10 +74,10 @@ export default function Employeeform() {
                         options={employeeService.getDepartmentCollection()}
                     />
                     <Controls.DatePicker
-                    name="hireDate"
-                    label="Hire Date"
-                    value={values.hireDate}
-                    onChange={handleInputChange}
+                        name="hireDate"
+                        label="Hire Date"
+                        value={values.hireDate}
+                        onChange={handleInputChange}
                     />
                     <Controls.Checkbox
                         name="isPermanent"
@@ -73,6 +85,14 @@ export default function Employeeform() {
                         value={values.isPermanent}
                         onChange={handleInputChange}
                     />
+                    <div>
+                        <Controls.Button
+                            type="submit"
+                            text="Submit" />
+                        <Controls.Button
+                            text="Reset"
+                            color="default" />
+                    </div>
                 </Grid>
             </Grid>
         </Form>
