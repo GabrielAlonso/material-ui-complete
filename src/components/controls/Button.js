@@ -20,7 +20,7 @@ export default function Button(props) {
             variant={variant || "contained"}
             size={size || "large"}
             color={color || "primary"}
-            onclick={onClick}
+            onClick={onClick}
             {...other}
             classes={{ root: classes.root, label: classes.label }}>
             {text}

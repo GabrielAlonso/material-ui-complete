@@ -23,31 +23,37 @@ const initialFValues = {
 
 export default function Employeeform() {
 
-    const validate = () => {
-        let temp = {}
-        temp.fullName = values.fullName ? "" : "This field is required."
-        temp.email = (/$^|.+@.+..+/).test(values.email) ? "" : "Email is not valid."
-        temp.mobile = values.mobile.length > 9 ? "" : "Minimum 10 numbers required."
-        temp.departmentId = values.departmentId != 0 ? "" : "This field is required."
+    const validate = (fieldValues = values) => {
+        let temp = { ...errors }
+        if ('fullName' in fieldValues)
+            temp.fullName = fieldValues.fullName ? "" : "This field is required."
+        if ('email' in fieldValues)
+            temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
+        if ('mobile' in fieldValues)
+            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+        if ('departmentId' in fieldValues)
+            temp.departmentId = fieldValues.departmentId != 0 ? "" : "This field is required."
         setErrors({
             ...temp
         })
-
-        return Object.values(temp).every(x => x == "")
+        if (fieldValues === values)
+            return Object.values(temp).every(x => x === "")
     }
 
     const {
         values,
-        setValues,
         errors,
         setErrors,
-        handleInputChange
-    } = useForm(initialFValues);
+        handleInputChange,
+        resetForm
+    } = useForm(initialFValues, true, validate);
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (validate())
-            window.alert('testing...');
+        if (validate()) {
+            employeeService.insertEmployee(values)
+            resetForm()
+        }
     }
 
     return (
@@ -96,6 +102,7 @@ export default function Employeeform() {
                         value={values.departmentId}
                         onChange={handleInputChange}
                         options={employeeService.getDepartmentCollection()}
+                        error={errors.departmentId}
                     />
                     <Controls.DatePicker
                         name="hireDate"
@@ -115,7 +122,8 @@ export default function Employeeform() {
                             text="Submit" />
                         <Controls.Button
                             text="Reset"
-                            color="default" />
+                            color="default"
+                            onClick={resetForm} />
                     </div>
                 </Grid>
             </Grid>
