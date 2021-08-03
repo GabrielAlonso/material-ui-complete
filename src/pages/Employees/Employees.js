@@ -17,7 +17,7 @@ const headCells = [
     { id: 'fullName', label: 'Employee Name' },
     { id: 'email', label: 'Email Address (Personal)' },
     { id: 'mobile', label: 'Mobile Number' },
-    { id: 'departament', label: 'Departament' }
+    { id: 'departament', label: 'Departament', disableSorting:true }
 ]
 
 export default function Employees() {
@@ -27,7 +27,9 @@ export default function Employees() {
 
     const {
         TblContainer,
-        TblHead
+        TblHead,
+        TblPagination,
+        recordsAfterPagingAndSorting
     } = useTable(records, headCells);
 
     return (
@@ -43,7 +45,7 @@ export default function Employees() {
                     <TblHead />
                     <TableBody>
                         {
-                            records.map(item =>
+                            recordsAfterPagingAndSorting().map(item =>
                             (<TableRow key={item.id}>
                                 <TableCell>{item.fullName}</TableCell>
                                 <TableCell>{item.email}</TableCell>
@@ -53,8 +55,8 @@ export default function Employees() {
                         }
                     </TableBody>
                 </TblContainer>
+                <TblPagination />
             </Paper>
-
         </>
     )
 }

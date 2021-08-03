@@ -35,6 +35,5 @@ export function getAllEmployees() {
     return employees.map(x => ({
         ...x,
         department: departments[x.departmentId - 1].title
-
     }))
 }
