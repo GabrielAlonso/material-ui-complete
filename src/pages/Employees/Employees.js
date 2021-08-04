@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Popup from "../../components/Popup";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
+import Notification from '../../components/Notification';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -42,6 +43,7 @@ export default function Employees() {
     const [records, setRecords] = useState(employeeService.getAllEmployees())
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     const [openPopup, setOpenPopup] = useState(false);
+    const [notify, setNotify] = useState({ isOpen: false, message: '', type: '' });
 
     const {
         TblContainer,
@@ -72,11 +74,28 @@ export default function Employees() {
         setRecordForEdit(null)
         setOpenPopup(false)
         setRecords(employeeService.getAllEmployees())
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully',
+            type: 'success'
+        })
     }
 
     const openInPopup = item => {
         setRecordForEdit(item)
         setOpenPopup(true)
+    }
+
+    const onDelete = id => {
+        if (window.confirm('Are you sure to delete this record?')) {
+            employeeService.deleteEmployee(id);
+            setRecords(employeeService.getAllEmployees());
+            setNotify({
+                isOpen: true,
+                message: 'Deleted Successfully',
+                type: 'error'
+            })
+        }
     }
 
     return (
@@ -124,7 +143,10 @@ export default function Employees() {
                                             onClick={() => { openInPopup(item) }} />
                                     </Controls.ActionButton>
                                     <Controls.ActionButton
-                                        color="secondary">
+                                        color="secondary"
+                                        onClick={() => {
+                                            onDelete(item.id)
+                                        }}>
                                         <CloseIcon fontSize="small" />
                                     </Controls.ActionButton>
                                 </TableCell>
@@ -143,6 +165,10 @@ export default function Employees() {
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit} />
             </Popup>
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
         </>
     )
 }
