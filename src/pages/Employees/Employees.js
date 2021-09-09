@@ -12,7 +12,7 @@ import Popup from "../../components/Popup";
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import Notification from '../../components/Notification';
-import ConfirmDialog from "../../components/ConfirmDialog"
+import ConfirmDialog from "../../components/ConfirmDialog";
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
